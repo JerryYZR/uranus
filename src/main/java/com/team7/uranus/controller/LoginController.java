@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
 
 @RestController
 public class LoginController {
@@ -21,12 +20,13 @@ public class LoginController {
     private UserMapper userMapper;
 
     @PostMapping("/login")
-    public ResponseData<String> login(Map<String,String> map) throws MyException{
-        throw new MyException(100,"失误");
-//        String jwtToken = JwtUtil.generateToken("123",456);
-//        ResponseData<String> r = new ResponseData<>();
-//        r.setData(jwtToken);
-//        return r;
+    public ResponseData<String> login(@RequestBody User user) throws MyException{
+        String username = user.getUserName();
+        String password = user.getPassword();
+        String jwtToken = JwtUtil.generateToken("123",456);
+        ResponseData<String> r = new ResponseData<>();
+        r.setData(jwtToken);
+        return r;
     }
 
     @PostMapping("/register")

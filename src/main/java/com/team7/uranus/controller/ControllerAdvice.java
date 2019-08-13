@@ -18,7 +18,6 @@ public class ControllerAdvice {
     // 404错误
     @ExceptionHandler(NoHandlerFoundException.class)
     public ResponseData<String> NoHandlerFoundExceptionHandler(NoHandlerFoundException ex) {
-        log.info("","没有的事情");
         return resultFormat(404, ex, "没有这个接口");
     }
 
@@ -36,7 +35,7 @@ public class ControllerAdvice {
 
     @ExceptionHandler(value = MyException.class)
     public ResponseData<String> runMyException(MyException ex){
-        return resultFormat(ex.getErrorCode(),ex,ex.getErrorMsg());
+        return resultFormat(ex.getErrorCode(),ex,ex.getMessage());
     }
 
     private <T extends Throwable> ResponseData<String> resultFormat(Integer code, T ex, String message) {

@@ -9,6 +9,6 @@ public class MyException extends RuntimeException{
 
     private int errorCode;
 
-    private String errorMsg;
+    private String message;
 
 }

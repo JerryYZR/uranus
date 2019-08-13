@@ -5,12 +5,11 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 @Data
-@TableName("org_info")
-public class OrgInfo {
+@TableName("user_info")
+public class UserSample {
     @TableId
-    private Long orgId;
-    private String orgName;
-    private String orgDesc;
-    private String type;
-    private String createTime;
+    private Long userId;
+    private String userName;
+    private String nickname;
+    private Integer ismanager;
 }
