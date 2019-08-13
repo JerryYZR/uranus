@@ -1,0 +1,15 @@
+package com.team7.uranus;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+@MapperScan("com.team7.uranus.mapper")
+public class UranusApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(UranusApplication.class, args);
+    }
+
+}
