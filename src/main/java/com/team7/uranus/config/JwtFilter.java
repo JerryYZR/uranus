@@ -1,5 +1,6 @@
 package com.team7.uranus.config;
 
+import com.team7.uranus.Exception.MyException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureException;
@@ -23,16 +24,13 @@ public class JwtFilter extends GenericFilterBean {
 //        final HttpServletResponse response = (HttpServletResponse) res;
 //
 //        // Get authorization from Http request
-//        final String authHeader = request.getHeader("authorization");
+//        final String authHeader = request.getHeader("token");
 //
 //
 //        // Check the authorization, check if the token is started by "Bearer "
-//        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-//            throw new ServletException("Missing or invalid Authorization header");
+//        if (authHeader == null) {
+//            throw new MyException(400 ,"缺少token");
 //        }
-//
-//        // Then get the JWT token from authorization
-//        final String token = authHeader.substring(7);
 //
 //        try {
 //            // Use JWT parser to check if the signature is valid with the Key "secretkey"

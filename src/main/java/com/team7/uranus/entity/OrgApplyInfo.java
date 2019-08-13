@@ -13,7 +13,7 @@ public class OrgApplyInfo {
     private String type;
     private String updateTime;
     @TableId
-    private String orgApplyId;
+    private int orgApplyId;
     private String applyPerson;
     private String applyTime;
     private String applyType;

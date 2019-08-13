@@ -3,6 +3,7 @@ package com.team7.uranus.controller;
 //import com.github.pagehelper.Page;
 //import com.github.pagehelper.PageHelper;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.team7.uranus.domain.ResponseData;
@@ -20,19 +21,19 @@ public class OrgInfoController {
     private OrgInfoMapper orgInfoMapper;
 
     @GetMapping("/api/orgInfo")
-    public ResponseData getOrgInfo() {
+    public ResponseData getOrgInfo(@RequestParam int pageNum,@RequestParam String orgName) {
 //        IPage<OrgInfo> orgInfoIPage =
 //        Page<OrgInfo> orgInfoPage = orgInfoMapper.selectPage(IPage,null);
         Page<OrgInfo> orgInfoPage = new Page<>();
-        orgInfoPage.setPages(1);
+        orgInfoPage.setPages(pageNum);
         orgInfoPage.setSize(10);
-        IPage<OrgInfo> page = orgInfoMapper.selectPage(orgInfoPage, null);
+        IPage<OrgInfo> page = orgInfoMapper.selectPage(orgInfoPage, new QueryWrapper<OrgInfo>().lambda().like(OrgInfo::getOrgName,orgName));
         ResponseData orgInfoResponseData = new ResponseData<>();
         orgInfoResponseData.setData(page);
         return orgInfoResponseData;
     }
 
-    @GetMapping("/api/orgInfo/{id}")
+    @GetMapping("/api/orgInfo/{orgId}")
     public ResponseData<OrgInfo> getChangeApply(@PathVariable int orgId) {
         OrgInfo orgInfo = orgInfoMapper.selectById(orgId);
         ResponseData<OrgInfo> r = new ResponseData<>();
@@ -45,6 +46,7 @@ public class OrgInfoController {
         orgInfoMapper.insert(orgInfo);
         return new ResponseData<>(200, "success", "success");
     }
+
 
 
 }
