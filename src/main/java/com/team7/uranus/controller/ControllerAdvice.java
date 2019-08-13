@@ -34,8 +34,8 @@ public class ControllerAdvice {
     }
 
     @ExceptionHandler(value = MyException.class)
-    public ResponseData<String> runMyException(MyException ex){
-        return resultFormat(ex.getErrorCode(),ex,ex.getMessage());
+    public ResponseData<String> runMyException(MyException ex) {
+        return resultFormat(ex.getErrorCode(), ex, ex.getMessage());
     }
 
     private <T extends Throwable> ResponseData<String> resultFormat(Integer code, T ex, String message) {

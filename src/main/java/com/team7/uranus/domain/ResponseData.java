@@ -10,7 +10,7 @@ public class ResponseData<T> {
     private String message;
     private T data;
 
-    public ResponseData(){
+    public ResponseData() {
         this.code = 200;
     }
 

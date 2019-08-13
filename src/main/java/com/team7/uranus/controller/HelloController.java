@@ -16,10 +16,10 @@ public class HelloController {
     private UserMapper userMapper;
 
     @RequestMapping("/hello")
-    public ResponseData<String> hello(){
+    public ResponseData<String> hello() {
         List<User> userList = userMapper.selectList(null);
         userList.forEach(System.out::println);
-        return new ResponseData<>(200,"true","hello");
+        return new ResponseData<>(200, "true", "hello");
     }
 
 }

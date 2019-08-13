@@ -22,16 +22,16 @@ public class OrgApplyController {
 
 
     @PostMapping("/api/orgApply")
-    public ResponseData postOrgApply(@RequestBody OrgApplyInfo orgApplyInfo){
+    public ResponseData postOrgApply(@RequestBody OrgApplyInfo orgApplyInfo) {
         orgApplyInfo.setApplyTime(LocalDateTime.now().toString());
         orgApplyInfo.setUpdateTime(LocalDateTime.now().toString());
         orgApplyInfo.setState(0);
         orgApplyInfoMapper.insert(orgApplyInfo);
-        return new ResponseData<>(200,"success","success");
+        return new ResponseData<>(200, "success", "success");
     }
 
     @GetMapping("/api/orgApply")
-    public ResponseData getApply(@RequestParam int pageNum){
+    public ResponseData getApply(@RequestParam int pageNum) {
         Page<OrgApplyInfo> orgInfoPage = new Page<>();
         orgInfoPage.setPages(pageNum);
         orgInfoPage.setSize(10);
@@ -42,7 +42,7 @@ public class OrgApplyController {
     }
 
     @GetMapping("/api/orgApply/{id}")
-    public ResponseData getChangeApply(@PathVariable int orgApplyId){
+    public ResponseData getChangeApply(@PathVariable int orgApplyId) {
         OrgApplyInfo orgApplyInfo = orgApplyInfoMapper.selectById(orgApplyId);
         ResponseData<OrgApplyInfo> r = new ResponseData<>();
         r.setData(orgApplyInfo);

@@ -20,26 +20,26 @@ public class LoginController {
     private UserMapper userMapper;
 
     @PostMapping("/login")
-    public ResponseData<String> login(@RequestBody User user) throws MyException{
+    public ResponseData<String> login(@RequestBody User user) throws MyException {
         String username = user.getUserName();
         String password = user.getPassword();
-        String jwtToken = JwtUtil.generateToken("123",456);
+        String jwtToken = JwtUtil.generateToken("123", 456);
         ResponseData<String> r = new ResponseData<>();
         r.setData(jwtToken);
         return r;
     }
 
     @PostMapping("/register")
-    public ResponseData<String> register(@RequestBody User user){
+    public ResponseData<String> register(@RequestBody User user) {
         String name = user.getUserName();
-        int userListSize = userMapper.selectList(new QueryWrapper<User>().lambda().eq(User::getUserName,name)).size();
-        if(userListSize > 0){
-            throw new MyException(666,"用户已经注册");
+        int userListSize = userMapper.selectList(new QueryWrapper<User>().lambda().eq(User::getUserName, name)).size();
+        if (userListSize > 0) {
+            throw new MyException(666, "用户已经注册");
         }
         String newPassword = Md5Util.encode(user.getPassword());
         user.setIsmanager(0);
         user.setPassword(newPassword);
         userMapper.insert(user);
-        return new ResponseData<>(200,"success","success");
+        return new ResponseData<>(200, "success", "success");
     }
 }
