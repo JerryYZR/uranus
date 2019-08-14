@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UserSampleMapper userSampleMapper;
 
-    @GetMapping("/api/isadmin")
+    @GetMapping("/api/isAdmin")
     public ResponseData<List<UserSample>> getAdmin(){
         List<UserSample> userSampleList = userSampleMapper.selectList(new QueryWrapper<UserSample>().lambda().eq(UserSample::getIsmanager,1));
         ResponseData<List<UserSample>> orgInfoResponseData = new ResponseData<>();

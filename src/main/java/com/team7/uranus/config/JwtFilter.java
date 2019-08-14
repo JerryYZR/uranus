@@ -35,9 +35,11 @@ public class JwtFilter extends GenericFilterBean {
             final Claims claims = Jwts.parser().setSigningKey("secretkey").parseClaimsJws(token).getBody();
             roles =(Integer)claims.get("roles");
             // Add the claim to request header
+            logger.info(claims);
             request.setAttribute("user", claims);
             request.setAttribute("userId",claims.get("sub"));
             request.setAttribute("roles",claims.get("roles"));
+            logger.info(claims);
         } catch (final SignatureException e) {
             throw new MyException(300,"Invalid token");
         }

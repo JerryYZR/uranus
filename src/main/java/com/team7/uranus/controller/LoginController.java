@@ -33,7 +33,7 @@ public class LoginController {
         if(user1==null){
             throw new MyException(670,"账号密码错误");
         }
-        String token = Jwts.builder().setSubject(user1.getUserName())
+        String token = Jwts.builder().setSubject(""+user1.getUserId())
                 .claim("roles", user1.getIsmanager()).setIssuedAt(new Date())
                 .signWith(SignatureAlgorithm.HS256, "secretkey").compact();
         Map map = new HashMap();
