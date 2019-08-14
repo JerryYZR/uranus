@@ -12,6 +12,7 @@ public class OrgApplyInfo {
     private String orgDesc;
     private String type;
     private String updateTime;
+    private String create_time;
     @TableId
     private int orgApplyId;
     private String applyPerson;

@@ -3,22 +3,25 @@ package com.team7.uranus.controller;
 import com.team7.uranus.domain.ResponseData;
 import com.team7.uranus.entity.User;
 import com.team7.uranus.mapper.UserMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Slf4j
 @RestController
 public class HelloController {
 
     @Autowired
     private UserMapper userMapper;
 
-    @RequestMapping("/hello")
-    public ResponseData<String> hello() {
-        List<User> userList = userMapper.selectList(null);
-        userList.forEach(System.out::println);
+    @RequestMapping("/api/hello")
+    public ResponseData<String> hello(@RequestHeader(value="userId")String userId,@RequestHeader(value="roles")String roles) {
+        log.info(userId);
+        log.info(roles);
         return new ResponseData<>(200, "true", "hello");
     }
 
