@@ -23,9 +23,9 @@ public class LoginController {
     public ResponseData<String> login(@RequestBody User user) throws MyException {
         String username = user.getUserName();
         String password = user.getPassword();
-        String jwtToken = JwtUtil.generateToken("123", 456);
+//        String jwtToken = JwtUtil.generateToken("123", 456);
         ResponseData<String> r = new ResponseData<>();
-        r.setData(jwtToken);
+//        r.setData(jwtToken);
         return r;
     }
 
