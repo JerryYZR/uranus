@@ -12,8 +12,6 @@ import com.team7.uranus.mapper.OrgInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.util.List;
 
 @RestController
 public class OrgInfoController {
@@ -22,8 +20,6 @@ public class OrgInfoController {
 
     @GetMapping("/api/orgInfo")
     public ResponseData getOrgInfo(@RequestParam int pageNum,@RequestParam String orgName) {
-//        IPage<OrgInfo> orgInfoIPage =
-//        Page<OrgInfo> orgInfoPage = orgInfoMapper.selectPage(IPage,null);
         Page<OrgInfo> orgInfoPage = new Page<>();
         orgInfoPage.setPages(pageNum);
         orgInfoPage.setSize(10);
@@ -41,7 +37,7 @@ public class OrgInfoController {
         return r;
     }
 
-    @PostMapping("/api/orgInfo")
+    @PostMapping("/api/admin/orgInfo")
     public ResponseData addOrgInfo(@RequestBody OrgInfo orgInfo) {
         orgInfoMapper.insert(orgInfo);
         return new ResponseData<>(200, "success", "success");
