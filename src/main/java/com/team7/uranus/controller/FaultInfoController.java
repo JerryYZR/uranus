@@ -47,9 +47,9 @@ public class FaultInfoController {
         faultInfoPage.setSize(10);
         IPage<FaultInfo> page = faultInfoMapper.selectPage(faultInfoPage, Wrappers.<FaultInfo>query().lambda()
                 .eq(FaultInfo::getLinkUserId, linkUserId)
-                .eq(FaultInfo::getStatus, status)
-                .eq(FaultInfo::getFaultApplication, faultApplication)
-                .eq(FaultInfo::getFaultTitle, faultTitle));
+                .eq(status!=null,FaultInfo::getStatus, status)
+                .eq(!faultApplication.isEmpty(),FaultInfo::getFaultApplication, faultApplication)
+                .eq(!faultTitle.isEmpty(),FaultInfo::getFaultTitle, faultTitle));
         ResponseData faultInfoResponseData = new ResponseData<>();
         faultInfoResponseData.setData(page);
         return faultInfoResponseData;
