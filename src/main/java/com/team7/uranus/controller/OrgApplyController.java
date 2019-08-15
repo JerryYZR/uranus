@@ -1,6 +1,5 @@
 package com.team7.uranus.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -10,8 +9,8 @@ import com.team7.uranus.entity.OrgApplyInfo;
 import com.team7.uranus.mapper.OrgApplyInfoMapper;
 import com.team7.uranus.service.OrgApplyService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.util.LambdaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.NumberUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -28,8 +27,7 @@ public class OrgApplyController {
     private OrgApplyService orgApplyService;
 
     @PostMapping("/api/orgApply")
-    public ResponseData postOrgApply(@RequestBody OrgApplyInfo orgApplyInfo,@RequestHeader(value="userId")String userId) {
-        orgApplyInfo.setApplyPerson(userId);
+    public ResponseData postOrgApply(@RequestBody OrgApplyInfo orgApplyInfo) {
         orgApplyInfo.setApplyTime(LocalDateTime.now().toString());
         orgApplyInfo.setUpdateTime(LocalDateTime.now().toString());
         orgApplyInfo.setState(0);
@@ -49,7 +47,7 @@ public class OrgApplyController {
         return orgInfoResponseData;
     }
 
-    @GetMapping("/api/orgApply/{orgApplyId}")
+    @GetMapping("/api/orgApply/{id}")
     public ResponseData getChangeApply(@PathVariable int orgApplyId) {
         OrgApplyInfo orgApplyInfo = orgApplyInfoMapper.selectById(orgApplyId);
         ResponseData<OrgApplyInfo> r = new ResponseData<>();
@@ -57,7 +55,7 @@ public class OrgApplyController {
         return r;
     }
 
-    @PutMapping("/api/admin/confirm/{orgApplyId}")
+    @PutMapping("/api/confirm/{orgApplyId}")
     public ResponseData confirm(@PathVariable int orgApplyId,@RequestBody Map isAgreeBody){
         String isAgree = (String) isAgreeBody.get("isAgree");
         if(isAgree==null){

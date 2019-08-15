@@ -8,7 +8,7 @@ import lombok.Data;
 @TableName("user_info")
 public class User {
     @TableId
-    private int userId;
+    private Long userId;
     private String userName;
     private String password;
     private String nickname;
@@ -19,5 +19,5 @@ public class User {
     private String department;
     private String position;
     private Integer ismanager;
-    private String telphone;
+
 }
