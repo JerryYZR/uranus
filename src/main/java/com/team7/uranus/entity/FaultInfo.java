@@ -12,6 +12,7 @@ public class FaultInfo {
     private String faultTitle;
     private int status;//null
     private String faultApplication;
+    private int linkUserId;
     private String linkMan;
     private String linkPhone;
     private String createdTime;
