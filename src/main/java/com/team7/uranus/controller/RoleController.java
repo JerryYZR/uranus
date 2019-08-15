@@ -1,6 +1,7 @@
 package com.team7.uranus.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.team7.uranus.Exception.MyException;
 import com.team7.uranus.domain.ResponseData;
 import com.team7.uranus.entity.RoleInfo;
 import com.team7.uranus.entity.RoleUser;
@@ -86,7 +87,10 @@ public class RoleController {
         RoleUser roleUser = new RoleUser();
         roleUser.setRoleId(roleId);
         roleUser.setUserId(userId);
-        roleUserMapper.delete(new QueryWrapper<RoleUser>().lambda().eq(RoleUser::getRoleId,roleId).eq(RoleUser::getUserId,userId));
-        return new ResponseData<>(200, "true", "hello");
+        int resultId = roleUserMapper.delete(new QueryWrapper<RoleUser>().lambda().eq(RoleUser::getRoleId,roleId).eq(RoleUser::getUserId,userId));
+        if (resultId!=1){
+            throw new MyException(692,"没有对应数据");
+        }
+        return new ResponseData<>(200, "true", "success");
     }
 }

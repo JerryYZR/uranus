@@ -2,6 +2,7 @@ package com.team7.uranus.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -22,16 +23,14 @@ public class SystemLogAspect {
     public void doAfter(JoinPoint joinPoint) throws Throwable {
         log.info("目标方法名为:" + joinPoint.getSignature().getName());
         log.info("目标方法所属类的简单类名:" +        joinPoint.getSignature().getDeclaringType().getSimpleName());
-        log.info("目标方法所属类的类名:" + joinPoint.getSignature().getDeclaringTypeName());
-        log.info("目标方法声明类型:" + Modifier.toString(joinPoint.getSignature().getModifiers()));
         //获取传入目标方法的参数
         Object[] args = joinPoint.getArgs();
         for (int i = 0; i < args.length; i++) {
             log.info("第" + (i+1) + "个参数为:" + args[i]);
         }
         log.info("被代理的对象:" + joinPoint.getTarget());
-        log.info("代理对象自己:" + joinPoint.getThis());
-        log.info("请求了接口。");
+        ProceedingJoinPoint pjp = (ProceedingJoinPoint)joinPoint;
+        log.info("返回值:"+pjp.proceed());
     }
 //
 //
