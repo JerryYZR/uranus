@@ -15,4 +15,5 @@ public class AppInfo {
     private String contacts;
     private String appDes;
     private String updateTime;
+    private int appApplyId;
 }
