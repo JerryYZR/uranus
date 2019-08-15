@@ -1,12 +1,13 @@
 server:
   port: 8888
+
 spring:
   mvc:
     throw-exception-if-no-handler-found: true
   resources:
     add-mappings: false
   datasource:
-    #    jdbc-url: jdbc:mysql://localhost:32776/learn
+#    jdbc-url: jdbc:mysql://localhost:32776/learn
     url: jdbc:mysql://120.77.36.216:3306/learn?useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
@@ -28,4 +29,3 @@ spring:
     maxPoolPreparedStatementPerConnectionSize: 20
     useGlobalDataSourceStat: true
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
-
