@@ -10,7 +10,7 @@ import com.team7.uranus.entity.OrgApplyInfo;
 import com.team7.uranus.mapper.OrgApplyInfoMapper;
 import com.team7.uranus.service.OrgApplyService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.util.LambdaUtil;
+//import org.apache.logging.log4j.util.LambdaUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
