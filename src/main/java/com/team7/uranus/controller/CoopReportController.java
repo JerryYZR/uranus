@@ -2,14 +2,9 @@ package com.team7.uranus.controller;
 
 import java.time.LocalDateTime;
 
+import com.team7.uranus.Exception.MyException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -50,10 +45,11 @@ public class CoopReportController {
      * @param coopReport
      * @return
      */
-    @PostMapping("/api/report")
-    public ResponseData postReport(@RequestBody CoopReport coopReport) {
+    @PostMapping("/api/insertcoop")
+    public ResponseData postReport(@RequestBody CoopReport coopReport,@RequestAttribute(value="userId")int userId) {
         coopReport.setRepTime(LocalDateTime.now().toString());
         coopReport.setMalState(0);
+        coopReport.setUserId(userId);
         coopReportMapper.insert(coopReport);
         return new ResponseData<>(200, "success", "success");
     }
@@ -61,14 +57,13 @@ public class CoopReportController {
 
     /**
      * 根据repid返回结果
-     * 表单
-     *
+     * 表单1
      * @param repId
      * @return
      */
-    @GetMapping("/api/report/{repId}")
-    public ResponseData getChangeApply(@PathVariable int repId) {
-        CoopReport coopReport = coopReportMapper.selectById(repId);
+    @GetMapping("/api/report/{repid}")
+    public ResponseData getChangeApply(@PathVariable int repid) {
+        CoopReport coopReport = coopReportMapper.selectById(repid);
         ResponseData<CoopReport> r = new ResponseData<>();
         r.setData(coopReport);
         return r;
@@ -77,31 +72,36 @@ public class CoopReportController {
 
     /**
      * 撤销或者其他更新状态
-     *
+     *1
      * @param repid
      * @return
      */
 
     @PutMapping("/api/reback/{repId}")
-    public ResponseData reback(@PathVariable int repId) {
+    public ResponseData reback(@PathVariable int repId,@RequestAttribute(value="userId")int userId) {
 
         CoopReport coopReport = coopReportMapper.selectById(repId);
-        coopReport.setMalState(0);
-        return new ResponseData(200, "success", "success");
+
+        if (coopReport.getUserId() == userId) {
+            coopReport.setMalState(1);
+            return new ResponseData(200, "success", "success");
+        } else {
+            throw new MyException(797, "无法撤销");
+        }
     }
 
 
     /**
      * 确认报备
-     *
+     *0
      * @param repId
      * @return
      */
-    @PutMapping("/api/confirmrep/{repId}")
-    public ResponseData confirmrep(@PathVariable int repId) {
-        CoopReport coopReport2 = coopReportMapper.selectById(repId);
-        coopReport2.setMalState(2);
-        return new ResponseData(200, "success", "success");
 
+    @PutMapping("/api/admin/confirmrep/{repId}")
+    public ResponseData confirmrep(@PathVariable int repId) {
+        CoopReport coopReport= coopReportMapper.selectById(repId);
+            coopReport.setMalState(2);
+            return new ResponseData(200, "success", "success");
     }
 }

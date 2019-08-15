@@ -17,5 +17,6 @@ public class CoopReport {
 	private String hopeTime;
 	private String tel;
 	private String content;
+	private int userId;
 	
 }
