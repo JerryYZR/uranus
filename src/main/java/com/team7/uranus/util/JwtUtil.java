@@ -22,7 +22,7 @@ public class JwtUtil {
     /**
      * jwt 加密解密密钥
      */
-    private static final String JWT_SECRET = "MDk4ZjZiY2Q0NjIxwwxdwa2NhZGU0ZTgzMjYyN2I0ZjY=";
+    private static final String JWT_SECRET = "secretkey";
 
     public static final String jwtId = "jwtidhahaha";
     /**
