@@ -1,16 +1,12 @@
 package com.team7.uranus.controller;
 
 import com.team7.uranus.domain.ResponseData;
-import com.team7.uranus.entity.User;
 import com.team7.uranus.mapper.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @Slf4j
 @RestController
