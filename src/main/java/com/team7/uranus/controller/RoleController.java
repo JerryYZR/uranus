@@ -1,8 +1,6 @@
 package com.team7.uranus.controller;
 
-
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.team7.uranus.VO.UserRoleView;
 import com.team7.uranus.domain.ResponseData;
 import com.team7.uranus.entity.RoleInfo;
 import com.team7.uranus.entity.RoleUser;
@@ -14,7 +12,6 @@ import com.team7.uranus.mapper.UserMapper;
 import com.team7.uranus.mapper.UserSampleMapper;
 import com.team7.uranus.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -84,12 +81,8 @@ public class RoleController {
         return r;
     }
 
-
-
-    @DeleteMapping("/api/admin/delRole")
-    public  ResponseData delUserRole(@RequestBody Map<String,Integer> map){
-        Integer roleId = map.get("roleId");
-        Integer userId = map.get("userId");
+    @DeleteMapping("/api/admin/delRole/{userId}/{roleId}")
+    public  ResponseData delUserRole(@PathVariable Integer userId,@PathVariable Integer roleId){
         RoleUser roleUser = new RoleUser();
         roleUser.setRoleId(roleId);
         roleUser.setUserId(userId);
