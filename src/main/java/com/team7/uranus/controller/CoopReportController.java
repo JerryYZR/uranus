@@ -98,7 +98,7 @@ public class CoopReportController {
      * @return
      */
 
-    @PutMapping("/api/confirmrep/{repId}")
+    @PutMapping("/api/admin/confirmrep/{repId}")
     public ResponseData confirmrep(@PathVariable int repId) {
         CoopReport coopReport= coopReportMapper.selectById(repId);
             coopReport.setMalState(2);
