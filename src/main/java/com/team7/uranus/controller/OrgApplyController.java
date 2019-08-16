@@ -38,9 +38,7 @@ public class OrgApplyController {
 
     @GetMapping("/api/orgApply")
     public ResponseData getApply(@RequestParam int pageNum,@RequestParam String state,@RequestParam String orgName) {
-        Page<OrgApplyInfo> orgInfoPage = new Page<>();
-        orgInfoPage.setPages(pageNum);
-        orgInfoPage.setSize(10);
+        Page<OrgApplyInfo> orgInfoPage = new Page<>(pageNum,10);
         IPage<OrgApplyInfo> page = orgApplyInfoMapper.selectPage(orgInfoPage, Wrappers.<OrgApplyInfo>query().lambda().
                 like(OrgApplyInfo::getOrgName,orgName).like(OrgApplyInfo::getState,state).orderBy(true, true, OrgApplyInfo::getState));
         ResponseData orgInfoResponseData = new ResponseData<>();

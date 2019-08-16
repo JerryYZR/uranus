@@ -23,9 +23,7 @@ public class AppInfoController {
     //显示应用信息
     @PostMapping("/api/getInfo")
     public ResponseData getRep(@RequestParam int pageNum, @RequestParam String department, @RequestParam String enName) {
-        Page<AppInfo> appInfoPage = new Page<>();
-        appInfoPage.setPages(pageNum);
-        appInfoPage.setSize(10);
+        Page<AppInfo> appInfoPage = new Page<>(pageNum,10);
         IPage<AppInfo> page = appInfoMapper.selectPage(appInfoPage,
                 new LambdaQueryWrapper<AppInfo>().like(!enName.isEmpty(), AppInfo::getEnName, enName)
                         .eq(!department.isEmpty(), AppInfo::getDepartment, department));

@@ -23,9 +23,7 @@ public class FaultInfoController {
                                      @RequestParam Integer status,
                                      @RequestParam String faultApplication,
                                      @RequestParam String faultTitle) { //状态，应用，故障标题
-        Page<FaultInfo> faultInfoPage = new Page<>();
-        faultInfoPage.setPages(pageNum);
-        faultInfoPage.setSize(10);
+        Page<FaultInfo> faultInfoPage = new Page<>(pageNum,10);
         IPage<FaultInfo> page = faultInfoMapper.selectPage(faultInfoPage, Wrappers.<FaultInfo>query().lambda()
                 .eq(status != null, FaultInfo::getStatus, status).eq(!faultApplication.isEmpty(), FaultInfo::getFaultApplication, faultApplication)
                 .like(faultTitle != null, FaultInfo::getFaultTitle, faultTitle));
@@ -42,9 +40,7 @@ public class FaultInfoController {
                                          @RequestParam Integer status,
                                          @RequestParam String faultApplication,
                                          @RequestParam String faultTitle) {
-        Page<FaultInfo> faultInfoPage = new Page<>();
-        faultInfoPage.setPages(pageNum);
-        faultInfoPage.setSize(10);
+        Page<FaultInfo> faultInfoPage = new Page<>(pageNum,10);
         IPage<FaultInfo> page = faultInfoMapper.selectPage(faultInfoPage, Wrappers.<FaultInfo>query().lambda()
                 .eq(FaultInfo::getLinkUserId, linkUserId)
                 .eq(status!=null,FaultInfo::getStatus, status)
