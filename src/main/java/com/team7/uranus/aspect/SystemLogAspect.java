@@ -29,18 +29,9 @@ public class SystemLogAspect {
             log.info("第" + (i+1) + "个参数为:" + args[i]);
         }
         log.info("被代理的对象:" + joinPoint.getTarget());
-        ProceedingJoinPoint pjp = (ProceedingJoinPoint)joinPoint;
-        log.info("返回值:"+pjp.proceed());
+//        ProceedingJoinPoint pjp = (ProceedingJoinPoint)joinPoint;
+//        log.info("返回值:"+pjp.proceed());
     }
-//
-//
-//    @After("execution(* com.abc.service.*.many*(..))")
-//    public void releaseResource(JoinPoint point) {
-//        log.info("@After：模拟释放资源...");
-//        log.info("@After：目标方法为：" +
-//                point.getSignature().getDeclaringTypeName() +
-//                "." + point.getSignature().getName());
-//        log.info("@After：参数为：" + Arrays.toString(point.getArgs()));
-//        log.info("@After：被织入的目标对象为：" + point.getTarget());
-//    }
+
+
 }
