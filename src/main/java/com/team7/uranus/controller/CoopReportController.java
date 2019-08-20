@@ -28,10 +28,10 @@ public class CoopReportController {
      * @param repName
      */
     @GetMapping("/api/coopReport")
-    public ResponseData getRep(@RequestParam int pageNum, @RequestParam Integer malState, @RequestParam String malCap) {
+    public ResponseData getRep(@RequestParam int pageNum, @RequestParam Integer malState, @RequestParam String malCap,@RequestAttribute(value="userId")int userId,@RequestAttribute(value="roles")int roles) {
         Page<CoopReport> coopReportPage = new Page<>(pageNum,10);
         IPage<CoopReport> page = coopReportMapper.selectPage(coopReportPage,
-                new LambdaQueryWrapper<CoopReport>().like(!malCap.isEmpty(), CoopReport::getMalCap, malCap)
+                new LambdaQueryWrapper<CoopReport>().eq(roles>0?false:true,CoopReport::getUserId,userId).like(!malCap.isEmpty(), CoopReport::getMalCap, malCap)
                         .eq(!(malState == null), CoopReport::getMalState, malState));
         ResponseData coopReportResponseData = new ResponseData<>();
         coopReportResponseData.setData(page);
