@@ -30,6 +30,7 @@ public class OrgApplyServiceImpl extends ServiceImpl<OrgApplyInfoMapper, OrgAppl
         if("新建".equals(applyType)){
             OrgInfo orgInfo = new OrgInfo(orgApplyInfo.getOrgName(),
                     orgApplyInfo.getOrgDesc(),orgApplyInfo.getType(), LocalDateTime.now().toString());
+            orgInfo.setCreatePerson(orgApplyInfo.getApplyPerson());
             orgInfoService.save(orgInfo);
         }else if("修改".equals(applyType)) {
             //get information of organization and update

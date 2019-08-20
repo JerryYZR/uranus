@@ -82,6 +82,7 @@ public class CoopReportController {
 
         if (coopReport.getUserId() == userId) {
             coopReport.setMalState(1);
+            coopReportMapper.updateById(coopReport);
             return new ResponseData(200, "success", "success");
         } else {
             throw new MyException(797, "无法撤销");
@@ -99,7 +100,8 @@ public class CoopReportController {
     @PutMapping("/api/admin/confirmrep/{repId}")
     public ResponseData confirmrep(@PathVariable int repId) {
         CoopReport coopReport= coopReportMapper.selectById(repId);
-            coopReport.setMalState(2);
-            return new ResponseData(200, "success", "success");
+        coopReport.setMalState(2);
+        coopReportMapper.updateById(coopReport);
+        return new ResponseData(200, "success", "success");
     }
 }

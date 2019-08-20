@@ -7,7 +7,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.team7.uranus.Exception.MyException;
 import com.team7.uranus.domain.ResponseData;
 import com.team7.uranus.entity.OrgApplyInfo;
+import com.team7.uranus.entity.User;
 import com.team7.uranus.mapper.OrgApplyInfoMapper;
+import com.team7.uranus.mapper.UserMapper;
 import com.team7.uranus.service.OrgApplyService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +28,13 @@ public class OrgApplyController {
     @Autowired
     private OrgApplyService orgApplyService;
 
+    @Autowired
+    private UserMapper userMapper;
+
     @PostMapping("/api/orgApply")
-    public ResponseData postOrgApply(@RequestBody OrgApplyInfo orgApplyInfo,@RequestHeader(value="userId")String userId) {
-        orgApplyInfo.setApplyPerson(userId);
+    public ResponseData postOrgApply(@RequestBody OrgApplyInfo orgApplyInfo,@RequestAttribute(value="userId")String userId) {
+        User user = userMapper.selectById(userId);
+        orgApplyInfo.setApplyPerson(user.getNickname());
         orgApplyInfo.setApplyTime(LocalDateTime.now().toString());
         orgApplyInfo.setUpdateTime(LocalDateTime.now().toString());
         orgApplyInfo.setState(0);

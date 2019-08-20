@@ -9,7 +9,7 @@ import lombok.Data;
 @TableName("report_info")
 public class CoopReport {
 	@TableId
-	private Integer repId;
+	private int repId;
 	private String malCap;
 	private int malState;
 	private String contact;

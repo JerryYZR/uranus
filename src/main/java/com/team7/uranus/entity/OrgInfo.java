@@ -15,6 +15,7 @@ public class OrgInfo {
     private int orgId;
     private String orgName;
     private String orgDesc;
+    private String createPerson;
     private String type;
     private String createTime;
 

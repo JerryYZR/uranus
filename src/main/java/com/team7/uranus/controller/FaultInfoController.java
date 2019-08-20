@@ -45,7 +45,7 @@ public class FaultInfoController {
                 .eq(FaultInfo::getLinkUserId, linkUserId)
                 .eq(status!=null,FaultInfo::getStatus, status)
                 .eq(!faultApplication.isEmpty(),FaultInfo::getFaultApplication, faultApplication)
-                .eq(!faultTitle.isEmpty(),FaultInfo::getFaultTitle, faultTitle));
+                .like(!faultTitle.isEmpty(),FaultInfo::getFaultTitle, faultTitle));
         ResponseData faultInfoResponseData = new ResponseData<>();
         faultInfoResponseData.setData(page);
         return faultInfoResponseData;
@@ -70,7 +70,9 @@ public class FaultInfoController {
     //故障提交时间：SubmitedTime，由后端获取当前时间
     @PostMapping("/api/faultInfoSub")
     public ResponseData addfaultInfo(@RequestBody FaultInfo faultInfo,@RequestAttribute(value="userId")Integer linkUserId) {
-
+//        String faultId = faultInfo.getFaultApplication();
+//        FaultInfo faultInfo1 = faultInfoMapper.selectById(faultId);
+//        faultInfo.setFaultApplication(faultInfo1.getFaultApplication());
         faultInfo.setLinkUserId(linkUserId);
         faultInfo.setStatus(0);
         faultInfo.setSubmitedTime(LocalDateTime.now().toString());

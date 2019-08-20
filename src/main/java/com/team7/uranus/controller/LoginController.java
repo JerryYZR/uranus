@@ -55,6 +55,6 @@ public class LoginController {
         user.setIsmanager(0);
         user.setPassword(newPassword);
         userMapper.insert(user);
-        return new ResponseData<>(200, "success", "success");
+        return new ResponseData<>(200, "注册成功", "success");
     }
 }

@@ -1,5 +1,6 @@
 package com.team7.uranus.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -20,4 +21,5 @@ public class FaultInfo {
     private String handledTime;
     private String content;
     private String result;//null
+
 }
